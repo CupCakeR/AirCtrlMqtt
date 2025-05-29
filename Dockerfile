@@ -32,10 +32,4 @@ COPY --from=builder /app/target/release/AirCtrlMqtt /usr/local/bin/airctrl-mqtt
 # Change to non-root user
 USER appuser
 
-# Set environment variables with defaults
-ENV MQTT_HOST=localhost
-ENV MQTT_PORT=1883
-ENV MQTT_CLIENT_ID=airctrl_client
-ENV MQTT_TOPIC=airctrl/sensors
-
 ENTRYPOINT ["airctrl-mqtt"]

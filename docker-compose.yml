@@ -9,6 +9,9 @@ services:
       - MQTT_TOPIC=airctrl/sensors
       - MQTT_USERNAME=
       - MQTT_PASSWORD=
+      - HA_DISCOVERY_ENABLED=true
+      - HA_DISCOVERY_PREFIX=homeassistant
+      - HA_OBJECT_ID=AirCtrlMqtt_7d269530
     devices:
       - /dev/aircontrol:/dev/aircontrol
     restart: unless-stopped

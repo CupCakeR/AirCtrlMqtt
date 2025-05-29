@@ -1,4 +1,5 @@
 use crate::config::Config;
+use crate::homeassistant::HomeAssistantDiscovery;
 use chrono::{DateTime, Utc};
 use rumqttc::{Client, Connection, Event, MqttOptions, Packet, QoS};
 use std::thread;
@@ -7,6 +8,7 @@ use std::time::{Duration, Instant};
 pub struct MqttClient {
     client: Client,
     topic: String,
+    ha_discovery_prefix: String,
 }
 
 impl MqttClient {
@@ -24,6 +26,7 @@ impl MqttClient {
         let mqtt_client = MqttClient {
             client,
             topic: config.topic.clone(),
+            ha_discovery_prefix: config.ha_discovery_prefix.clone(),
         };
 
         Ok((mqtt_client, connection))
@@ -101,10 +104,28 @@ impl MqttClient {
         }
     }
 
+    pub fn publish_discovery(&self, object_id: &String) {
+        println!("Publishing Home Assistant discovery configuration...");
+
+        let ha_discovery = HomeAssistantDiscovery::new(
+            object_id.clone(),
+            self.topic.clone(),
+            self.ha_discovery_prefix.clone(),
+        );
+
+        let (topic, payload) = ha_discovery.get_discovery_config();
+        if let Err(e) = self.client.publish(&topic, QoS::AtLeastOnce, true, payload) {
+            eprintln!("Failed to publish discovery config to {}: {}", topic, e);
+        } else {
+            println!("Published discovery config to: {}", topic);
+        }
+    }
+
     pub fn clone(&self) -> Self {
         MqttClient {
             client: self.client.clone(),
             topic: self.topic.clone(),
+            ha_discovery_prefix: self.ha_discovery_prefix.clone(),
         }
     }
 }
