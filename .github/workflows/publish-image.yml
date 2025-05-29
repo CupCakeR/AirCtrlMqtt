@@ -30,7 +30,8 @@ jobs:
         with:
           images: cupcaker/air-ctrl-mqtt
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,
+            type=semver,pattern={{version}}
 
       - name: Build and push Docker image
         id: push
