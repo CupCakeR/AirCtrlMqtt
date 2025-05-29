@@ -45,6 +45,10 @@ Configuration is handled through environment variables:
 
 _Usage instructions will be added after Docker image publication._
 
+## Todo
+
+- [ ] Home Assistant entity discovery
+
 ## Credits
 
 Thanks to [DJE98](https://github.com/DJE98) for the [aircontrol](https://crates.io/crates/aircontrol) crate!
