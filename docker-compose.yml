@@ -1,19 +1,15 @@
-# Example docker-compose configuration
-# Copy this to docker-compose.override.yml and customize for your setup
-
 services:
   airctrl-mqtt:
-    build: .
+    image: cupcaker/air-ctrl-mqtt:latest
     container_name: airctrl-mqtt
     environment:
-      # Update these to match your MQTT broker
       - MQTT_HOST=your-mqtt-broker-host
       - MQTT_PORT=1883
       - MQTT_CLIENT_ID=airctrl_client
       - MQTT_TOPIC=airctrl/sensors
       - MQTT_USERNAME=
       - MQTT_PASSWORD=
+    devices:
+      - /dev/aircontrol:/dev/aircontrol
     restart: unless-stopped
     stop_grace_period: 2s
-    # devices:
-    #   - /dev/bus/usb:/dev/bus/usb
