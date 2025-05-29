@@ -33,11 +33,6 @@ jobs:
             type=raw,value=latest
             type=semver,pattern={{version}}
 
-      - name: Debug metadata output
-        run: |
-          echo "::notice title=Tags::${{ steps.meta.outputs.tags }}"
-          echo "::notice title=Labels::${{ steps.meta.outputs.labels }}"
-
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
