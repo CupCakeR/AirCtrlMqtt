@@ -43,7 +43,66 @@ Configuration is handled through environment variables:
 
 ## Usage
 
-_Usage instructions will be added after Docker image publication._
+### 1. Device Setup
+
+First, create a udev rule to create a stable device symlink. Create the file `/etc/udev/rules.d/99-aircontrol.rules`:
+
+```
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", SYMLINK+="aircontrol", MODE="0666"
+```
+
+Then reload udev rules:
+
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+### 2. Docker Compose
+
+Create a `docker-compose.yml` file:
+
+```yaml
+services:
+  airctrl-mqtt:
+    image: cupcaker/air-ctrl-mqtt:latest
+    container_name: airctrl-mqtt
+    environment:
+      - MQTT_HOST=your-mqtt-broker-host
+      - MQTT_PORT=1883
+      - MQTT_CLIENT_ID=airctrl_client
+      - MQTT_TOPIC=airctrl/sensors
+      - MQTT_USERNAME=your-username # Optional
+      - MQTT_PASSWORD=your-password # Optional
+    devices:
+      - /dev/aircontrol:/dev/aircontrol
+    restart: unless-stopped
+    stop_grace_period: 2s
+```
+
+Update the environment variables with your MQTT broker settings, then run:
+
+```bash
+docker-compose up -d
+```
+
+### 3. Docker Run
+
+Alternatively, run directly with Docker:
+
+```bash
+docker run -d \
+  --name airctrl-mqtt \
+  --device /dev/aircontrol:/dev/aircontrol \
+  -e MQTT_HOST=your-mqtt-broker-host \
+  -e MQTT_PORT=1883 \
+  -e MQTT_CLIENT_ID=airctrl_client \
+  -e MQTT_TOPIC=airctrl/sensors \
+  -e MQTT_USERNAME=your-username \
+  -e MQTT_PASSWORD=your-password \
+  --restart unless-stopped \
+  cupcaker/air-ctrl-mqtt:latest
+```
 
 ## Todo
 
