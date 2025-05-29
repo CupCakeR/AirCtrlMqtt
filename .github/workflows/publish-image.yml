@@ -30,7 +30,7 @@ jobs:
         with:
           images: cupcaker/air-ctrl-mqtt
           tags: |
-            type=raw,value=latest,
+            type=raw,value=latest
             type=semver,pattern={{version}}
 
       - name: Debug metadata output
