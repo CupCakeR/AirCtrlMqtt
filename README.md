@@ -7,24 +7,21 @@ A Rust application that reads sensor data from TFA Dostmann AIRCO2NTROL devices 
 - Real-time monitoring of CO2, temperature, and humidity sensors
 - MQTT integration for remote data collection
 - Home Assistant auto-discovery support
-- Docker containerization for easy deployment
-- Configurable via environment variables
 
 ## Sensor Data
 
-The application publishes the following sensor readings:
+Supported sensor readings:
 
 - **CO2**: Parts per million (ppm)
 - **Temperature**: Degrees Celsius (°C)
 - **Humidity**: Percentage (%)
-
-Data is published to a configurable MQTT topic with timestamp information.
 
 ## Configuration
 
 Configuration is handled through environment variables:
 
 ### MQTT Settings
+
 - `MQTT_HOST`: MQTT broker hostname
 - `MQTT_PORT`: MQTT broker port (default: 1883)
 - `MQTT_CLIENT_ID`: MQTT client identifier (default: airctrl_client)
@@ -33,6 +30,7 @@ Configuration is handled through environment variables:
 - `MQTT_TOPIC`: MQTT topic for sensor data (default: airctrl/sensors)
 
 ### Home Assistant Settings
+
 - `HA_DISCOVERY_ENABLED`: Enable Home Assistant auto-discovery (default: true)
 - `HA_DISCOVERY_PREFIX`: Home Assistant discovery prefix (default: homeassistant)
 - `HA_OBJECT_ID`: Unique device identifier for Home Assistant (default: AirCtrlMqtt_7d269530)
@@ -47,6 +45,7 @@ Configuration is handled through environment variables:
 - Supported air quality monitoring device (see above)
 - MQTT broker for data collection
 - Docker (for containerized deployment)
+- (optional) [Home Assistant MQTT](https://www.home-assistant.io/integrations/mqtt/)
 
 ## Usage
 
