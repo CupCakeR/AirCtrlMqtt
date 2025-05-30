@@ -1,5 +1,8 @@
 # AirCtrlMqtt
 
+[![Publish action](https://github.com/CupCakeR/AirCtrlMqtt/actions/workflows/publish-image.yml/badge.svg)](https://github.com/CupCakeR/AirCtrlMqtt/actions/workflows/publish-image.yml)
+[![Latest Release](https://img.shields.io/github/v/release/CupCakeR/AirCtrlMqtt)](https://github.com/CupCakeR/AirCtrlMqtt/releases)
+
 A Rust application that reads sensor data from TFA Dostmann AIRCO2NTROL devices and publishes the readings to an MQTT broker.
 
 ## Features
@@ -7,6 +10,8 @@ A Rust application that reads sensor data from TFA Dostmann AIRCO2NTROL devices 
 - Real-time monitoring of CO2, temperature, and humidity sensors
 - MQTT integration for remote data collection
 - Home Assistant auto-discovery support
+
+![Home Assistant Entity](images/home-assistant-entity.png)
 
 ## Sensor Data
 
