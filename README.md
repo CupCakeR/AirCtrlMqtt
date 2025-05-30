@@ -1,6 +1,5 @@
 # AirCtrlMqtt
 
-[![Publish action](https://github.com/CupCakeR/AirCtrlMqtt/actions/workflows/publish-image.yml/badge.svg)](https://github.com/CupCakeR/AirCtrlMqtt/actions/workflows/publish-image.yml)
 [![Latest Release](https://img.shields.io/github/v/release/CupCakeR/AirCtrlMqtt)](https://github.com/CupCakeR/AirCtrlMqtt/releases)
 
 A Rust application that reads sensor data from TFA Dostmann AIRCO2NTROL devices and publishes the readings to an MQTT broker.
