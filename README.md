@@ -20,6 +20,20 @@ Supported sensor readings:
 - **Temperature**: Degrees Celsius (°C)
 - **Humidity**: Percentage (%)
 
+<details>
+<summary>MQTT Payload Example</summary>
+
+```json
+{
+  "time": "2025-01-01T12:00:00.000Z",
+  "co2": 400,
+  "temperature": 22.5,
+  "humidity": 45.2
+}
+```
+
+</details>
+
 ## Configuration
 
 Configuration is handled through environment variables:
